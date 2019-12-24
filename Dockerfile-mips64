@@ -1,0 +1,25 @@
+FROM ubuntu:16.04 as builder
+MAINTAINER Vaibhav Bhembre <vaibhav@digitalocean.com>
+
+ENV GOROOT /goroot
+ENV GOPATH /go
+ENV PATH $GOROOT/bin:$PATH
+ENV APPLOC $GOPATH/src/github.com/digitalocean/ceph_exporter
+
+RUN apt-get update && \
+    apt-get install -y apt-transport-https build-essential git curl wget
+
+RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
+RUN echo "deb https://download.ceph.com/debian-luminous xenial main" >> /etc/apt/sources.list
+
+RUN apt-get update && \
+    apt-get install -y --force-yes librados-dev librbd-dev
+
+RUN \
+  mkdir -p /goroot && \
+  curl https://storage.googleapis.com/golang/go1.13.linux-amd64.tar.gz | tar xvzf - -C /goroot --strip-components=1
+
+ADD . $APPLOC
+WORKDIR $APPLOC
+RUN go get -d && \
+    GOARCH=mips64le go build -o /bin/ceph_exporter
