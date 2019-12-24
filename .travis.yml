@@ -34,5 +34,5 @@ after_success:
     docker build -t $DOCKER_REPO:$DOCKER_TAG . -f Dockerfile-arm;
     docker tag $DOCKER_REPO:$DOCKER_TAG $DOCKER_REPO:arm-latest;
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-    docker push $DOCKER_REPO;
+    docker push $DOCKER_REPO:arm-latest;
     fi
