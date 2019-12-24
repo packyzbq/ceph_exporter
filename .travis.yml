@@ -7,7 +7,7 @@ go:
   - 1.13
 
 env:
-  - DOCKER_TAG=$TRAVIS_TAG
+  - DOCKER_TAG=arm-latest
 
 before_install:
   - wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
