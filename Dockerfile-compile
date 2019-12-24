@@ -1,0 +1,2 @@
+From scratch
+COPY ./bin/ceph_exporter /ceph_exporter
