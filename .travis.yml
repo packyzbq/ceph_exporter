@@ -30,6 +30,6 @@ before_script:
 
 script:
   - GOARCH=mips64le go build -o bin/ceph_exporter;
-  - docker build -t $DOCKER_REPO:$DOCKER_TAG . -f Dockerfile-compile;
+  - docker build -t $DOCKER_REPO:$DOCKER_TAG . -f Dockerfile-mips64;
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
   - docker push $DOCKER_REPO;
