@@ -1,4 +1,4 @@
-FROM ubuntu:16.04 as builder
+FROM loongnix/debian-jessie:latest
 MAINTAINER Vaibhav Bhembre <vaibhav@digitalocean.com>
 
 ENV GOROOT /goroot
@@ -10,7 +10,7 @@ RUN apt-get update && \
     apt-get install -y apt-transport-https build-essential git curl wget
 
 RUN wget -q -O- 'https://download.ceph.com/keys/release.asc' | apt-key add -
-RUN echo "deb https://download.ceph.com/debian-luminous xenial main" >> /etc/apt/sources.list
+RUN echo "deb https://download.ceph.com/debian-luminous jessie main" >> /etc/apt/sources.list
 
 RUN apt-get update && \
     apt-get install -y --force-yes librados-dev librbd-dev
