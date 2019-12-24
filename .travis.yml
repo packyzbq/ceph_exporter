@@ -30,10 +30,8 @@ script:
 
 after_success:
   - export DOCKER_REPO="packyzbq/ceph_exporter"
-  - if [ ! -z "$TRAVIS_TAG" ]; then
-    docker build -t $DOCKER_REPO:$DOCKER_TAG . -f Dockerfile-arm;
-    docker tag $DOCKER_REPO:$DOCKER_TAG $DOCKER_REPO:arm-latest;
-    echo "$DOCKER_REPO:arm-latest"
-    docker login -u="packyzbq" -p="Qw./a111zbq";
-    docker push $DOCKER_REPO:arm-latest;
-    fi
+  - docker build -t $DOCKER_REPO:$DOCKER_TAG . -f Dockerfile-arm;
+  - docker tag $DOCKER_REPO:$DOCKER_TAG $DOCKER_REPO:arm-latest;
+  - echo "$DOCKER_REPO:arm-latest"
+  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
+  - docker push $DOCKER_REPO:arm-latest;
