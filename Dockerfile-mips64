@@ -22,4 +22,4 @@ RUN \
 ADD . $APPLOC
 WORKDIR $APPLOC
 RUN go get -d && \
-    GOARCH=mips64le go build -o /bin/ceph_exporter
+    CGO_ENABLED=0 GOOS=linux GOARCH=mips64le go build -o /bin/ceph_exporter

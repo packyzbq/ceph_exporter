@@ -30,7 +30,7 @@ script:
 
 after_success:
   - export DOCKER_REPO="packyzbq/cephexporter"
-  - docker build -t $DOCKER_REPO:$DOCKER_TAG . -f Dockerfile;
+  - docker build -t $DOCKER_REPO:$DOCKER_TAG . -f Dockerfile-mips64;
   - docker tag $DOCKER_REPO:$DOCKER_TAG $DOCKER_REPO:$arch-latest;
   - echo "$DOCKER_REPO:$arch-latest"
   - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
