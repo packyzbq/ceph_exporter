@@ -30,7 +30,7 @@ script:
 after_success:
   - export DOCKER_REPO="digitalocean/ceph_exporter"
   - if [ ! -z "$TRAVIS_TAG" ]; then
-    docker build -t $DOCKER_REPO:$DOCKER_TAG .;
+    docker build -t $DOCKER_REPO:$DOCKER_TAG . -f Dockerfile-arm;
     docker tag $DOCKER_REPO:$DOCKER_TAG $DOCKER_REPO:latest;
     docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
     docker push $DOCKER_REPO;
