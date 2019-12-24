@@ -26,7 +26,7 @@ install:
 script:
   - go test -coverprofile=collectors.coverprofile ./collectors
   - $HOME/gopath/bin/gover
-  - $HOME/gopath/bin/goveralls -coverprofile=gover.coverprofile -service travis-ci
+#  - $HOME/gopath/bin/goveralls -coverprofile=gover.coverprofile -service travis-ci
 
 after_success:
   - export DOCKER_REPO="packyzbq/ceph_exporter"
