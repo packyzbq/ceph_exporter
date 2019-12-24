@@ -1,0 +1,10 @@
+language: go
+sudo: required
+dist: trusty
+arch:
+- amd64
+go:
+  - 1.13
+
+env:
+  - DOCKER_TAG=arm-latest
