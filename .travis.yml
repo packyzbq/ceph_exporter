@@ -1,7 +1,8 @@
 language: go
 sudo: required
 dist: trusty
-
+arch:
+- arm64
 go:
   - 1.13
 
