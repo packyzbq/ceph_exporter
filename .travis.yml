@@ -24,14 +24,4 @@ install:
   - go get github.com/mattn/goveralls
 
 script:
-  - go test -coverprofile=collectors.coverprofile ./collectors
-  - $HOME/gopath/bin/gover
-#  - $HOME/gopath/bin/goveralls -coverprofile=gover.coverprofile -service travis-ci
-
-after_success:
-  - export DOCKER_REPO="packyzbq/cephexporter"
-  - docker build -t $DOCKER_REPO:$DOCKER_TAG . -f Dockerfile-arm;
-  - docker tag $DOCKER_REPO:$DOCKER_TAG $DOCKER_REPO:$arch-latest;
-  - echo "$DOCKER_REPO:$arch-latest"
-  - docker login -u="$DOCKER_USERNAME" -p="$DOCKER_PASSWORD";
-  - docker push $DOCKER_REPO:$arch-latest;
+  - go build -o bin/ceph-exporter
