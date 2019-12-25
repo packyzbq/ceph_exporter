@@ -2,33 +2,14 @@ language: go
 sudo: required
 dist: trusty
 arch:
-- amd64
+- mips64le
 go:
   - 1.13
 
 env:
   - DOCKER_TAG=tmp
 
-before_install:
-  - wget -q -O- 'https://download.ceph.com/keys/release.asc' | sudo apt-key add -
-  - echo deb https://download.ceph.com/debian-luminous/ $(lsb_release -sc) main | sudo tee /etc/apt/sources.list.d/ceph.list
-  - sudo apt-get update
-  - sudo apt-get install -y librados-dev librbd-dev
-
-install:
-  - go get github.com/ceph/go-ceph
-  - go get github.com/prometheus/client_golang/prometheus
-  - go get golang.org/x/tools/cmd/cover
-  - go get github.com/axw/gocov/gocov
-  - go get github.com/modocache/gover
-  - go get github.com/mattn/goveralls
-
 script:
-  - go test -coverprofile=collectors.coverprofile ./collectors
-  - $HOME/gopath/bin/gover
-#  - $HOME/gopath/bin/goveralls -coverprofile=gover.coverprofile -service travis-ci
-
-after_success:
   - export DOCKER_REPO="packyzbq/cephexporter"
   - docker build -t $DOCKER_REPO:$DOCKER_TAG . -f Dockerfile-mips64;
   - docker tag $DOCKER_REPO:$DOCKER_TAG $DOCKER_REPO:$arch-latest;
